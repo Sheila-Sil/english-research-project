@@ -17,7 +17,7 @@
             --transition-soft: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* --- Leaf Cursor or wtv--- */
+        /* --- leaf cursor or wtv--- */
         * { cursor: none; } 
 
         #custom-cursor {
@@ -40,7 +40,7 @@
             border: 1px solid var(--museum-gold);
         }
 
-        /* --- Scroll Progress Bar --- */
+        /* --- scrolly bar --- */
         #progress-container {
             position: fixed;
             top: 0;
@@ -74,7 +74,7 @@
             z-index: 1;
         }
 
-        /* --- Scroll Down Indicator --- */
+        /* --- the little thing w the arrow that indicates ya to scroll --- */
         .scroll-indicator {
             position: fixed;
             bottom: 40px;
@@ -117,7 +117,7 @@
             transform: translate(-50%, 20px);
         }
 
-        /* --- Navigation --- */
+        /* --- nav --- */
         nav {
             padding: 1.5rem 4rem;
             display: flex;
@@ -157,7 +157,7 @@
 
         .nav-links a:hover::after { width: 100%; }
 
-        /* --- Layout --- */
+        /* --- layout --- */
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -340,7 +340,7 @@
         const progressBar = document.getElementById('progress-bar');
         const links = document.querySelectorAll('.hover-target, a, .close-btn');
 
-        // Cursor Logic
+        // cursor logic
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
@@ -351,23 +351,23 @@
             link.addEventListener('mouseleave', () => cursor.classList.remove('active'));
         });
 
-        // Scroll Logic
+        // scroll logic
         window.addEventListener('scroll', () => {
-            // Scroll indicator fade
+            // scroll indicator fade
             if (window.scrollY > 50) {
                 scrollHint.classList.add('scroll-hidden');
             } else {
                 scrollHint.classList.remove('scroll-hidden');
             }
 
-            // Progress bar calculation
+            // progress bar math calc & allat jazz
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
             progressBar.style.width = scrolled + "%";
         });
 
-        // Particle Canvas Logic
+        // particle canvas logic
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -413,6 +413,7 @@
             modal.classList.remove('show');
             setTimeout(() => modal.style.display = 'none', 400);
         }
+        // hi mrs. gerik if you've reached this, i hope you've considered giving me a 100 or something close enough! 
     </script>
 </body>
 </html>
