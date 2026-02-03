@@ -273,7 +273,53 @@
             * { cursor: auto !important; }
             #custom-cursor { display: none; }
         }
-    </style>
+  /* Spotlight overlay */
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+        rgba(255, 255, 255, 0.03) 0%, 
+        transparent 60%, 
+        rgba(0, 0, 0, 0.85) 100%
+    );
+    pointer-events: none;
+    z-index: 5;
+    mix-blend-mode: soft-light; 
+}
+ .cta-container {
+    margin-top: 3rem;
+    animation: slideUp 1s ease-out 0.6s forwards;
+    opacity: 0;
+}
+
+.research-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border: 1px solid var(--museum-gold);
+    color: var(--museum-gold);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    background: transparent;
+    transition: var(--transition-soft);
+    position: relative;
+    overflow: hidden;
+}
+
+.research-btn:hover {
+    background: var(--museum-gold);
+    color: #000;
+    box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
+}
+  
+  </style>
 </head>
 <body>
 
@@ -305,8 +351,15 @@
         <div class="curation-panel">
             <h1>Apatosaurus <br> Research Summary</h1>
             <div class="essay-text">
-                <p>I’ve known about the Apatosaurus long before I had grasped topics like extinction, climate, or honestly much of anything. When I was younger, it was simply my passion; its sheer scale felt comforting.</p>
-                
+                <p>I’ve known about the Apatosaurus long before I had grasped topics like extinction, climate, or, honestly, much of anything. When I was younger, understanding it was simply my passion; its sheer scale felt comforting. In the backseat of my mom’s car, I would imagine highways stretching into the distance as the long, arching necks of the burly sauropods. It was like the modern world was reshaped into something ancient and alive.
+</p>
+      <div class="cta-container">
+    <a href="https://docs.google.com/document/d/1LcNjYQyJ81rvrMjSA6D8XAxAKUGJpicty2-9rrDP4Gg/edit?tab=t.0" 
+       target="_blank" 
+       class="research-btn hover-target">
+       Read Full Research Paper
+    </a>
+</div>          
                 <div class="quote-accent">
                     "Concrete bending like vertebrae, cutting through the land. Infrastructure became anatomy."
                 </div>
@@ -372,19 +425,22 @@
         const ctx = canvas.getContext('2d');
         let particles = [];
 
-        function initParticles() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            particles = [];
-            for (let i = 0; i < 60; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    r: Math.random() * 3 + 1,
-                    s: Math.random() * 0.4 + 0.1
-                });
-            }
-        }
+     function initParticles() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    particles = [];
+    // # of particles
+    for (let i = 0; i < 150; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            // sizes
+            r: Math.random() * 4 + 0.5, 
+            // speed
+            s: Math.random() * 0.5 + 0.1 
+        });
+    }
+}
 
         function drawParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -413,7 +469,20 @@
             modal.classList.remove('show');
             setTimeout(() => modal.style.display = 'none', 400);
         }
-        // hi mrs. gerik if you've reached this, i hope you've considered giving me a 100 or something close enough! 
+
+      document.addEventListener('mousemove', (e) => {
+    // Move the Custom Cursor
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+
+    // Update Spotlight Position
+    document.body.style.setProperty('--mouse-x', e.clientX + 'px');
+    document.body.style.setProperty('--mouse-y', e.clientY + 'px');
+
+
+});
+      
+      // hi mrs. gerik if you've reached this, i hope you've considered giving me a 100 or something close enough! 
     </script>
 </body>
 </html>
